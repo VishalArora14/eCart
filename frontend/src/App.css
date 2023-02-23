@@ -1,0 +1,35 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: #f5f5f7;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+html::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f8fff9;
+}
+
+html::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: #c6c6c6f1;
+  border-radius: 1rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.greenColor {
+  color: green !important;
+}
+
+.redColor {
+  color: red !important;
+}
