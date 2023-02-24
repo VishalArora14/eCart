@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../constants/helper";
 
 import {
   ALL_PRODUCT_FAIL,
@@ -30,7 +31,7 @@ import {
   DELETE_REVIEW_FAIL,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
-const api = "http://localhost:4000";
+const api = BASE_URL;
 
 // Get All Products
 export const getProduct =

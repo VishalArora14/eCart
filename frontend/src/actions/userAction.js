@@ -37,7 +37,8 @@ import {
   CLEAR_ERRORS,
 } from "../constants/userConstants";
 import axios from "axios";
-const api = "http://localhost:4000";
+import { BASE_URL } from "../constants/helper";
+const api = BASE_URL;
 
 // Login user
 export const login = (email, password) => async (dispatch) => {

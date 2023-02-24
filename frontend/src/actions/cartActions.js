@@ -4,7 +4,9 @@ import {
   SAVE_SHIPPING_INFO,
 } from "../constants/cartConstants";
 import axios from "axios";
-const api = "http://localhost:4000";
+import { BASE_URL } from "../constants/helper";
+
+const api = BASE_URL;
 
 // Add to Cart
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {

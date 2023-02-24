@@ -46,6 +46,7 @@ import ProductReviews from "./component/Admin/ProductReviews";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Contact from "./component/layout/Contact/Contact";
+import { BASE_URL } from "./constants/helper";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -59,7 +60,7 @@ function App() {
   };
 
   async function getStripeApiKey() {
-    const api = "http://localhost:4000";
+    const api = BASE_URL;
     const config = {
       method: "GET",
       headers: { "Content-Type": "application/json" },

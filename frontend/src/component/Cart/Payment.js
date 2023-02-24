@@ -17,6 +17,7 @@ import { MdCreditCard, MdEvent, MdVpnKey } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { clearErrors, createOrder } from "../../actions/orderActions";
+import { BASE_URL } from "../../constants/helper";
 
 const Payment = () => {
   const toastOptions = {
@@ -61,7 +62,7 @@ const Payment = () => {
         withCredentials: "true",
         credentials: "include",
       };
-      const api = "http://localhost:4000";
+      const api = BASE_URL;
       const { data } = await axios.post(
         api + "/api/v1/payment/process",
         paymentData,
