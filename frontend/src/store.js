@@ -1,7 +1,4 @@
-// import { createStore, combineReducers, applyMiddleware } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
-// import thunk from "redux-thunk";
-// import { composeWithDevTools } from "redux-devtools-extension";
 import {
   newProductReducer,
   newReviewReducer,
@@ -18,7 +15,7 @@ import {
   allUsersReducer,
   userDetailsReducer,
 } from "./reducers/userReducer";
-import {cartReducer} from "./reducers/cartReducer";
+import { cartReducer } from "./reducers/cartReducer";
 import {
   allOrdersReducer,
   myOrdersReducer,
