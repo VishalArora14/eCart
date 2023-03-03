@@ -52,6 +52,12 @@ exports.loginUser = async (req, res, next) => {
 
 //logout
 exports.logout = catchAsyncError(async (req, res, next) => {
+  
+  //3 lines bcz after deployement cookie is not setting to null
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
