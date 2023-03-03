@@ -64,6 +64,7 @@ exports.logout = catchAsyncError(async (req, res, next) => {
   });
 
   res.clearCookie('token'); // Delete the "token" cookie
+  console.log("Manual Logut Detected");
 
   res.status(200).json({
     success: true,
