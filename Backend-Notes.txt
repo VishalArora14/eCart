@@ -1,0 +1,133 @@
+Setup Procedure : 
+
+1)create 2 folders frontend and backend
+ in backend create files server.js and app.js
+ npm init in main/root folder ie outside of frontend and backend but make sure entry point is backend/server.js
+ npm i express mongoose dotenv
+
+2)create a config folder to create and store all config files in inside it eg PORT
+  add script "start":"node backend/server.js" in the package.json file
+    "dev":"nodemon backend/server.js" this is to use nodemon while development phase and after deployment start will be used
+
+3)Create routes and controllers folder in backend
+  in controllers create file productController.js
+  after the first route is sending correct response connect mongoDB with server
+
+4)create database.js file anywhere (inside confing here) so that our main server.js file is clutter free
+
+
+----------making product api's
+
+5)complete the product route make get/post/put/del req
+  ans create functions for all of them in product controllers
+
+6)checking every api after creating it uisng postman
+  create a folder on postman with name product
+  and save all api's there
+
+
+----------backend error handling
+
+7)we have used a lot of if conditions in the product controller and this could create a problem
+  thus create a class of error handling 
+  create a folder utils
+
+8)create ErrorHandler.js but it can not be used directly need to create a middleware
+
+9)Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+
+Callback argument to the middleware function, called "next" by convention.
+
+10)it is recommended to use try catch block in async and await 
+  so creating a error handler for that since cant create try catch everytime
+
+11)how original code was in product controller
+
+  //Get single product details
+
+  exports.getProductDetails = async (req,res,next) =>{
+
+    const product = await Product.findById(req.params.id);
+
+    if(!product){
+      // return res.status(500).json({
+      //   success:false,
+      //   message:"Product Not Found"
+      // })
+
+      return next(new ErrorHandler("Product Not Found", 404));
+      //next is a call back function
+      //it was declared with req,res of this fn
+    } 
+    
+    res.status(200).json({
+      success:true,
+      product
+    })
+  }
+
+12)added unhandled rejection . eg DB_URI is wrong etc . No catch is required
+
+13)Handling uncaught exception
+  eg console.log(youtube)
+  error : youtube is not defined
+
+14)Last Type of Error : MongoDB error
+
+
+------search filter pagination
+
+15) we can find data in product controller also eg Product.find({name:skecher})
+  but the problem here is it will return only those values whose name has this string and same letter-case
+  insted we can  use mongoDB operators :
+  use regex : now strings/names with skechers can be found 
+  and 
+  options : i now results with Skechers can also be found
+
+
+----------back user and password authentication
+
+16)npm i bcryptjs jsonwebtoken validator nodemailer cookie-parser body-parser
+
+17)create user model and user controller
+
+18)added register and login route
+19)used bcryptjs to encrypt password
+20)making jstToken.js utility func to reduce redundant code
+
+21)create a fn for authentication. Some parts of website can only be accessed by someone who is authenticated
+
+22)using cookie-parser
+23) thus register,login,logout created
+24) now create admin routes so that only admin can create new products
+
+25)forgot password : a method/function is created inside user schema. whenever somone clicks on reset password a resetPasswdToken is generated
+  and stored in the user database (which is valid for next 15 minutes) save the token using user.save() . Then an email is sent to the user.
+  If any error occurs first step is to set resetPasswdToken and resetPasswdTime to undefined and save it in the database.
+
+26)Now reset passwd when user clicks on email the reset token can be accessed using params and then that token can be hashed and checked in the DB
+
+27)now creating custom error messages if any error occurs eg same email error. tap into it using the error code
+
+
+-----------Backend User Routes API's
+
+28)eg profile check, update password, etc
+
+29)Now create an admin route by which he can check how many users are there on the website
+
+30)req.body.<somthing> is entered in body and passed as json whereas req.params.id is entered in the url
+  so when updating user find id using req.params rather user.id else admin will update itself
+
+31)created router for view all users, single user, modify role, delete user . All were admin routes
+
+32)Now create route to add reviews. single fn will create a review if it does not exist or modify if user has already given a review for that product
+
+
+-------------order routes API's
+
+33)Create order schema and model. 
+34)Create routes to create new order and view a single order
+35).populate() method is used to display name and email of user whose id is associated with this order
+
+36)user routes for view all my orders, view all orders -a, change order status -a, delete order -a
