@@ -61,7 +61,12 @@ export const login = (email, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: data.user,
     });
+
+    // Redirect the user to the specified URL
+    window.location.href = '/account';
+    // Reload the page
     window.location.reload();
+    
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
